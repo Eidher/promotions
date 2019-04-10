@@ -1,0 +1,178 @@
+<div class="container">
+  <div
+    [style.display]="alertMessage ? 'block' : 'none'"
+    class="alert"
+    [class.alert-success]="alertSuccess"
+    [class.alert-danger]="!alertSuccess"
+    role="alert"
+  >
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="hideAlert()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>{{ alertMessage }}</strong>
+  </div>
+
+  <blockquote>
+    <p>
+      HINTS
+    </p>
+    <footer>
+      All the products you added from the product page will be refleced in you
+      cart.
+    </footer>
+    <footer>
+      If there's any product promotion triggered, the same promotion will be
+      displayed at the bottom of the cart.
+    </footer>
+    <footer>
+      You can update the amount of products and the if there's any promotion
+      triggered, it will appear automatically at the promotions section.
+    </footer>
+    <footer>
+      The same applies if the promotion is not available anymore, when deleting
+      a product.
+    </footer>
+    <footer>
+      Promotions are stored in the <i>promotions</i> collection in Mongo and are
+      linked to products
+    </footer>
+  </blockquote>
+
+  <h2 class="title">Cart</h2>
+
+  <div *ngIf="!products.length">
+    <blockquote>
+      <p>No products added to your cart.</p>
+    </blockquote>
+    <a
+      [routerLink]="['/products']"
+      class="btn btn-success button"
+      role="button"
+    >
+      <span aria-hidden="true"></span> Select Products
+    </a>
+  </div>
+
+  <div *ngIf="products.length">
+    <div class="table-responsive">
+      <table class="table">
+        <thead class="thead-default">
+          <tr>
+            <th>#</th>
+            <th>SKU</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th>Promotion</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr></tr>
+          <tr *ngFor="let product of products; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ product.sku }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price / 100 | currency: "USD" }}</td>
+            <td>
+              <input
+                type="number"
+                id="qty-{{ product._id }}"
+                [ngModel]="product.qty"
+                class="qty"
+                maxlength="3"
+              />
+              <button
+                (click)="update(product._id, product.name)"
+                type="button"
+                class="btn btn-success btn-sm"
+              >
+                Update
+              </button>
+              <button
+                (click)="remove(product._id, i)"
+                type="button"
+                class="btn btn-danger btn-sm"
+              >
+                Remove
+              </button>
+            </td>
+            <td>
+              <span
+                *ngIf="product.hasPromotion"
+                class="glyphicon glyphicon-ok text-success"
+                aria-hidden="true"
+              ></span>
+            </td>
+            <td>
+              {{ product.subtotal / 100 | currency: "USD" }}
+            </td>
+          </tr>
+          <tr *ngIf="cartPromotions.length">
+            <td colspan="7">
+              <div class="panel panel-success">
+                <div class="panel-heading">
+                  <h4>Contratulations, you've got the following promotions!</h4>
+                </div>
+                <ul class="list-group">
+                  <li
+                    *ngFor="let promotion of cartPromotions; let i = index"
+                    class="list-group-item"
+                  >
+                    <h4 class="list-group-item-heading">
+                      <span
+                        class="glyphicon glyphicon-ok text-success"
+                        aria-hidden="true"
+                      ></span>
+                      {{ promotion.description }}
+                    </h4>
+                    <p *ngIf="promotion.original" class="list-group-item-text">
+                      Original Price:
+                      {{ promotion.original / 100 | currency: "USD" }}
+                    </p>
+                    <p *ngIf="promotion.new" class="list-group-item-text">
+                      New Price:
+                      <strong>{{
+                        promotion.new / 100 | currency: "USD"
+                      }}</strong>
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="row">
+      <div class="col-md-9 total title">Total Price:</div>
+      <div class="col-md-2 total price">
+        {{ cartTotal / 100 | currency: "USD" }}
+      </div>
+    </div>
+
+    <br />
+
+    <a
+      [routerLink]="['/products']"
+      class="btn btn-success button"
+      role="button"
+    >
+      <span aria-hidden="true"></span> Add More Products
+    </a>
+    <a
+      [routerLink]="['/checkout']"
+      class="btn btn-success button"
+      role="button"
+    >
+      <span class="glyphicon glyphicon-usd" aria-hidden="true"></span> Proceed
+      To Checkout
+    </a>
+  </div>
+</div>

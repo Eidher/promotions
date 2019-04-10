@@ -1,0 +1,107 @@
+<div class="container">
+  <div
+    [style.display]="alertMessage ? 'block' : 'none'"
+    class="alert"
+    [class.alert-success]="alertSuccess"
+    [class.alert-danger]="!alertSuccess"
+    role="alert"
+  >
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="hideAlert()"
+    >
+      <span aria-hidden="true">&times;</span>
+    </button>
+    <strong>{{ alertMessage }}</strong>
+    <a
+      *ngIf="alertSuccess"
+      [routerLink]="['/cart']"
+      class="btn btn-success btn-sm pull-right button"
+      role="button"
+    >
+      <span aria-hidden="true"></span> Go to Cart </a
+    >&nbsp;&nbsp;
+  </div>
+
+  <blockquote>
+    <p>
+      HINTS
+    </p>
+    <footer>
+      As you add products to your cart, the products are stored in the local
+      storage of your browser. So if you close the browser tab and come back to
+      the page your products will be still available in your cart.
+    </footer>
+    <footer>
+      If you add several times to the same product, the amount it's accumulated
+      in the cart.
+    </footer>
+    <footer>
+      If you don't enter an amount you get an error, and a confirmation message
+      if you do.
+    </footer>
+    <footer>
+      Products are stored in a Mongo database. You can access the dateabse by
+      connecting to <cite>http://localhost:2018</cite>.
+    </footer>
+    <footer>
+      You can also see the collection structure in the docker folder at the file
+      <cite>mongo-init.js</cite>
+    </footer>
+  </blockquote>
+
+  <h2 class="title">Products</h2>
+
+  <blockquote *ngIf="!products.length">
+    <p>No products available at this moment.</p>
+  </blockquote>
+
+  <div *ngIf="products.length">
+    <div class="table-responsive">
+      <table class="table">
+        <thead class="thead-default">
+          <tr>
+            <th>#</th>
+            <th>SKU</th>
+            <th>Name</th>
+            <th>Price</th>
+            <th>Qty</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of products; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ product.sku }}</td>
+            <td>{{ product.name }}</td>
+            <td>{{ product.price / 100 | currency: "USD" }}</td>
+            <td>
+              <input id="qty-{{ product._id }}" />
+            </td>
+            <td>
+              <button
+                (click)="addToCart(product._id, product.name)"
+                class="btn btn-success button"
+                role="button"
+              >
+                <span
+                  class="glyphicon glyphicon-shopping-cart"
+                  aria-hidden="true"
+                ></span>
+                Add to Cart
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <br />
+
+    <a [routerLink]="['/cart']" class="btn btn-success button" role="button">
+      <span aria-hidden="true"></span> Go to Cart
+    </a>
+  </div>
+</div>

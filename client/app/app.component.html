@@ -1,0 +1,31 @@
+<div class="container top">
+  <div class="row">
+    <div class="col-md-1">
+      <img [src]="logoImage" width="100" />
+    </div>
+    <div class="col-md-10 main-title">
+      <h1>
+        {{ company }} <span class="title">{{ title }}</span>
+      </h1>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <nav class="navbar navbar-default">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#"
+        >Eidher Escalona <span class="email">eidher.escalona@gmail.com</span></a
+      >
+    </div>
+    <ul class="nav navbar-nav navbar-right">
+      <li><a [routerLink]="['/']">Home</a></li>
+      <li><a [routerLink]="['/products']">Products</a></li>
+      <li><a [routerLink]="['/cart']">Cart</a></li>
+      <li><a [routerLink]="['/contact']">Contact</a></li>
+      <li class="hidden-xs hidden-sm"><a href="#">&nbsp;</a></li>
+    </ul>
+  </nav>
+</div>
+
+<router-outlet></router-outlet>
