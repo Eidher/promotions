@@ -22,17 +22,23 @@ When fished, check that you have two containers with names `docker_databas_1` an
 $ docker ps
 ```
 
-If you don't have both containers running or one is missing, run `docker-compose down` and then `docker-compuse up -d` again inside the `docker` folder.
+If you don't have both containers running or one is missing, run:
 
-If the containers were created successfully, go to your browser (Chrome) to the url `http:localhost:2080`.
+```shell
+$ docker-compose down
+```
 
-If you need to change the port number, go to docker folder and modify `.env` file and run `docker-compose up` again.
+and then
 
----
+```shell
+$ docker-compose down
+```
 
-NOTICE: If for some reason the page doesn't load or there's no products, stop the containers with `ctrl+c` and run `docker-compose up` again.
+again inside the `docker` folder.
 
----
+If the containers were created successfully, go to your browser (Chrome) to the url [http://localhost:2080](http://localhost:2080).
+
+If you need to change the port number, go to docker folder and modify `.env` file and run `docker-compose up -d` again.
 
 ## Author
 
