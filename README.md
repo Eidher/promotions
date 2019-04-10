@@ -16,8 +16,9 @@ $ cd promotions/docker/
 $ docker-compose up
 ```
 
-Go to your browser to `http:localhost:2080`
-If you need to change the port number, go to docker folder and modify `.env` file.
+When finished, go to your browser (Chrome) to the url `http:localhost:2080`.
+
+If you need to change the port number, go to docker folder and modify `.env` file and run `docker-compose up` again.
 
 ## Author
 
