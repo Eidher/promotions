@@ -1,7 +1,5 @@
 # BCGDV
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.0.4.
-
 ## Pre requirements
 
 `Docker` must be installed in your computer. [https://www.docker.com/](https://www.docker.com/)
@@ -14,7 +12,7 @@ There are 2 main foldes `client` with the client side (frontend) files and `serv
 
 ```shell
 $ git clone --recursive https://github.com/Eidher/promotions
-$ cd docker
+$ cd promotions/docker/
 $ docker-compose up
 ```
 
