@@ -46,5 +46,5 @@ again inside the `docker` folder.
 
 ## Author
 
-Eidhe Escalon
+Eidhe Escalona
 eidher.escalona@gmail.com
