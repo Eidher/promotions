@@ -1,19 +1,19 @@
 h1 {
-    .title {
-        font-size: 14px;
-        color: #bbbbbb;
-    }
+  .title {
+    font-size: 18px;
+    color: #bbbbbb;
+  }
 }
 
 span {
-    &.email {
-        color: #337ab7;
-        font-size: 12px;
-    }
+  &.email {
+    color: #337ab7;
+    font-size: 12px;
+  }
 }
 
 .top {
-    h1 {
-        margin-top: 10px;
-    }
+  h1 {
+    margin-top: 10px;
+  }
 }
